@@ -19,6 +19,7 @@ import com.bless.studexp.Adapters.SubjectRecyclerAdapter;
 import com.bless.studexp.databinding.FragmentSubjectsBinding;
 import com.bless.studexp.models.Course;
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
 
     private SubjectsViewModel mSubjectsViewModel;
     private FragmentSubjectsBinding binding;
+    private FirebaseFirestore db;
     public static final String TAG="SUBJECT_FRAGMENT";
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mSubjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
@@ -44,6 +46,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
                  binding.shimmerFrameLayout.setVisibility(View.GONE);
                  binding.shimmerImageSelected.stopShimmer();
                  binding.shimmerImageSelected.setVisibility(View.GONE);
+                 db = FirebaseFirestore.getInstance();
              }
          });
             return  root;
@@ -56,7 +59,6 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
     private void displayCourses(ArrayList<Course> courses){
         binding.recyclerView.setAdapter(new SubjectRecyclerAdapter(getActivity(),courses,this));
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-
     }
 
     @Override
@@ -68,5 +70,8 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
     private void displayMainImage(Course course) {
         String imageUrl = course.getImageUrl();
         Glide.with(getContext()).load(imageUrl).into(binding.imageBroad);
+    }
+    private void AddDataToCloudStore(Course course){
+
     }
 }

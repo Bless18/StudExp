@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class SubjectsViewModel extends ViewModel {
     private FirebaseDatabase mDb;
     private DatabaseReference mRef;
     private ArrayList<Course> subData;
+    private FirebaseFirestore db;
     public SubjectsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
@@ -36,6 +38,8 @@ public class SubjectsViewModel extends ViewModel {
         mRef=mDb.getReference();
         subData=new ArrayList<>();
         mSubject=new MutableLiveData<>();
+        db = FirebaseFirestore.getInstance();
+
     }
 
     public LiveData<String> getText() {

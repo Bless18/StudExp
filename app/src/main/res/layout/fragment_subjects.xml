@@ -9,6 +9,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="upload "
+        android:backgroundTint="@color/black"
+        android:id="@+id/testUpload"/>
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_image_selected"
             android:layout_width="match_parent"
