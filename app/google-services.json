@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1074378431893",
+    "firebase_url": "https://studx-fb98b-default-rtdb.firebaseio.com",
+    "project_id": "studx-fb98b",
+    "storage_bucket": "studx-fb98b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074378431893:android:4437e3f978f01e3abdea9c",
+        "android_client_info": {
+          "package_name": "com.bless.studexp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074378431893-or0d5khfntfn7brls9osl703glbq0krn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO4q7qy88zwJ4KkxxTqCk6G9C0s7YCd4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074378431893-or0d5khfntfn7brls9osl703glbq0krn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074378431893:android:795f58cc2145b53fbdea9c",
+        "android_client_info": {
+          "package_name": "com.example.studx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074378431893-or0d5khfntfn7brls9osl703glbq0krn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO4q7qy88zwJ4KkxxTqCk6G9C0s7YCd4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074378431893-or0d5khfntfn7brls9osl703glbq0krn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

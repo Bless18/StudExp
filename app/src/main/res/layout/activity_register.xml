@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/purple_500"
+        android:gravity="center">
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Account Register"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_marginBottom="-2dp"
+            android:padding="12dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="#F0F6F5"
+                app:cardCornerRadius="35dp">
+
+                <ImageView
+                    android:id="@+id/login_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/ic_person"
+                  />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/card"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="upload Photo"
+                android:textColor="@color/purple_200" />
+
+            <TextView
+                android:id="@+id/e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/upload"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="15dp"
+                android:text="Name:"
+                android:textColor="@color/purple_200" />
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/e"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_person"
+                android:drawablePadding="12dp"
+                android:hint="Enter Your names"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/l"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edt_name"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="10dp"
+                android:text="Level:"
+                android:textColor="@color/purple_200" />
+
+            <EditText
+                android:id="@+id/edt_level"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/l"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_educ"
+                android:drawablePadding="12dp"
+                android:hint="Enter Your education level"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/t"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_level"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="Town"
+                android:textColor="@color/purple_200" />
+
+            <EditText
+                android:id="@+id/edt_town"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/t"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_town"
+                android:drawablePadding="12dp"
+                android:hint="Enter your Town"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/el"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_town"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="Email"
+                android:textColor="@color/purple_200" />
+
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/el"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="12dp"
+                android:hint="Enter your Email"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <TextView
+                android:id="@+id/p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_email"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="Email"
+                android:textColor="@color/purple_200" />
+
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/p"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/ic_lock"
+                android:drawablePadding="12dp"
+                android:hint="Enter your Password"
+                android:inputType="textPassword"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <com.google.android.gms.common.internal.SignInButtonImpl
+                android:id="@+id/btn_register"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:layout_below="@id/edt_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_button"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                app:backgroundTint="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/alacc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_register"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Already have Account?" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_register"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@id/alacc"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+
+                android:onClick="goToLoginAct"
+                android:text="Login"
+                android:textColor="@color/purple_200" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>
