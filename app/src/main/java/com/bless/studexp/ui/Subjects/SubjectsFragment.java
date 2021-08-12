@@ -42,17 +42,27 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
         View root = binding.getRoot();
         binding.shimmerFrameLayout.startShimmer();
         binding.shimmerImageSelected.startShimmer();
-         mSubjectsViewModel.getSubjectList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Course>>() {
+//         mSubjectsViewModel.getSubjectList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Course>>() {
+//             @Override
+//             public void onChanged(ArrayList<Course> courses) {
+//
+//
+//             }
+//         });
+         mSubjectsViewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Course>>() {
              @Override
              public void onChanged(ArrayList<Course> courses) {
-                 displayCourses(courses);
+                   displayCourses(courses);
                  displayMainImage(courses.get(0));
-                 binding.subjectTitle.setText(courses.get(0).getName());
+                 Toast.makeText(getActivity(), courses.get(0).getName(), Toast.LENGTH_SHORT).show();
+                 Toast.makeText(getActivity(), courses.get(0).getImageUrl(), Toast.LENGTH_SHORT).show();
+                 binding.subjectTe.setText(courses.get(0).getName());
+                 binding.subjectDesc.setText(courses.get(0).getDescription());
                  binding.shimmerFrameLayout.stopShimmer();
                  binding.shimmerFrameLayout.setVisibility(View.GONE);
                  binding.shimmerImageSelected.stopShimmer();
                  binding.shimmerImageSelected.setVisibility(View.GONE);
-
+                 binding.relativeLayout.setVisibility(View.VISIBLE);
              }
          });
          binding.testUpload.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +98,8 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
     private void displayMainImage(Course course) {
         String imageUrl = course.getImageUrl();
         Glide.with(getContext()).load(imageUrl).into(binding.imageBroad);
+        binding.subjectDesc.setText(course.getDescription());
+        binding.subjectTe.setText(course.getName());
     }
     private void AddDataToCloudStore(Course course){
         Map<String,String> courseUpdate=new HashMap<>();
@@ -97,7 +109,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
         courseUpdate.put("imageUrl",course.getImageUrl());
         courseUpdate.put("level",course.getLevel());
 
-        db.collection("Courses/University/1")
+        db.collection("Courses")
                 .add(courseUpdate)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

@@ -42,8 +42,7 @@ public class SubjectRecyclerAdapter extends  RecyclerView.Adapter<SubjectRecycle
     @Override
     public void onBindViewHolder(@NonNull SubjectRecyclerAdapter.ViewHolder holder, int position) {
         Course course=courses.get(position);
-         holder.txtName.setText(course.getName());
-        holder.txtDescription.setText(course.getDescription());
+        holder.txtDescription.setText(course.getLevel());
         Glide.with(context).load(course.getImageUrl()).into(holder.imgDisp);
     }
 
@@ -55,14 +54,13 @@ public class SubjectRecyclerAdapter extends  RecyclerView.Adapter<SubjectRecycle
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imgDisp;
         private TextView txtDescription;
-        private TextView txtName;
+
         OnCourseListener onCourseListener;
         public ViewHolder(@NonNull View itemView,OnCourseListener onCourseListener) {
             super(itemView);
             this.onCourseListener=onCourseListener;
             imgDisp=itemView.findViewById(R.id.image_subject);
             txtDescription=itemView.findViewById(R.id.subject_description);
-            txtName=itemView.findViewById(R.id.subject_name);
             itemView.setOnClickListener(this);
         }
 

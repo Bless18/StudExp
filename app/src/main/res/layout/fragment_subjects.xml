@@ -4,33 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Subjects.SubjectsFragment">
+    tools:context=".ui.Subjects.SubjectsFragment"
+    android:background="#FFF4F4">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="upload "
-        android:backgroundTint="@color/black"
-        android:id="@+id/testUpload"/>
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_image_selected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="10dp"
-                >
+                android:layout_marginTop="5dp">
 
                 <TextView
-                    android:id="@+id/subject_title"
+                    android:id="@+id/subject_tle"
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,57 +44,78 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginBottom="0dp"
-                    android:background="#CDCDCD"
-                    android:scaleType="centerCrop" />
+                    android:background="#CDCDCD" />
             </RelativeLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="5dp"
             android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:clipToOutline="true"
+            app:cardCornerRadius="4dp"
+            android:visibility="invisible"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/image_broad"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@android:color/transparent" />
+                android:layout_height="300dp">
+                <Button
+                    android:id="@+id/testUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:text="upload " />
 
-            <TextView
-                android:id="@+id/suject_ttle"
-                style="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+                <ImageView
+                    android:id="@+id/image_broad"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop" />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/subject_te"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_broad"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/subject_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="7dp"
+                    android:ellipsize="end"
+                    android:paddingHorizontal="10dp"
+                    android:maxLines="6"
+                    android:layout_below="@id/subject_te" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_Frame_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_marginTop="15dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_below="@+id/relativeLayout">
+            app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <include layout="@layout/shimmer_subject_fragment" />
 
@@ -130,14 +152,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="4dp"
-            android:orientation="horizontal"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_below= "@+id/relativeLayout" />
+            android:layout_below="@+id/relativeLayout"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal" />
 
     </RelativeLayout>
 
