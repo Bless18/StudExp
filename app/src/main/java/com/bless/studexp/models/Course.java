@@ -8,12 +8,13 @@ public class Course {
     private  String level;
     private String key;
 
-    public Course(String name, String category, String description, String imageUrl, String level) {
+    public Course(String name, String category, String description, String imageUrl, String level,String key) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.imageUrl = imageUrl;
         this.level = level;
+        this.key=key;
     }
 
     public Course() {

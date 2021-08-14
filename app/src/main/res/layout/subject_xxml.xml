@@ -39,6 +39,7 @@
                     android:id="@id/subject_description"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
                     android:layout_below="@id/image_subject"
                     android:layout_marginTop="7dp"
