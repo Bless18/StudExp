@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CourseGroupChat extends AppCompatActivity {
+import com.bless.studexp.databinding.ActivityCourseDetailsBinding;
 
+public class CourseGroupChat extends AppCompatActivity {
+     private ActivityCourseDetailsBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_group_chat);
+        binding=ActivityCourseDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }

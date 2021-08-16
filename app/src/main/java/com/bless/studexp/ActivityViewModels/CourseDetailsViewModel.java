@@ -1,4 +1,4 @@
-package com.bless.studexp.AvctivityViewModels;
+package com.bless.studexp.ActivityViewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
