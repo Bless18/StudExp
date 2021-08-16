@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bless.studexp.Adapters.SubjectRecyclerAdapter;
+import com.bless.studexp.CourseDetailsActivity;
 import com.bless.studexp.CourseGroupChat;
+import com.bless.studexp.R;
 import com.bless.studexp.databinding.FragmentSubjectsBinding;
 import com.bless.studexp.models.Course;
 import com.bumptech.glide.Glide;
@@ -30,6 +32,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -99,6 +102,11 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
                  })
                  .setPositiveButton("Yes", (dialogInterface, i) -> addUserToTheGroup())
                      .show();
+         });
+         binding.relativeLayout.setOnClickListener(v->{
+             Intent intent= new Intent(getActivity(), CourseDetailsActivity.class);
+             intent.putExtra(getString(R.string.displaying_course),displayingCourse);
+             startActivity(intent);
          });
             return  root;
     }

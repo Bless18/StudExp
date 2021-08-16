@@ -1,6 +1,8 @@
 package com.bless.studexp.models;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String name;
     private String category;
     private String description;
