@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">StudEXP</string>
-    <string name="users">Users</string>
+
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,5 +20,9 @@
     <string name="menu_experiments">Experiments</string>
     <string name="menu_account">Account</string>
 
+<!--   my customized String Variables  -->
     <string name="displaying_course">Displaying Course</string>
+    <string name="users">Users</string>
+    <string name="groups">Groups</string>
+
 </resources>
