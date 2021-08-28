@@ -1,6 +1,7 @@
 package com.bless.studexp.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     private String name;
@@ -10,6 +11,9 @@ public class User {
     private int numQuesAns;
     private String town;
     private String imageUrl;
+    private String key;
+    public User() {
+    }
 
     public User(String name, String level, String email, ArrayList<String> groupId, int numQuesAns, String town, String imageUrl) {
         this.name = name;
@@ -19,6 +23,14 @@ public class User {
         this.numQuesAns = numQuesAns;
         this.town = town;
         this.imageUrl = imageUrl;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
@@ -44,7 +56,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-        public ArrayList<String> getGroupId() {
+
+    public ArrayList<String> getGroupId() {
         return groupId;
     }
 
@@ -86,6 +99,7 @@ public class User {
                 ", numQuesAns=" + numQuesAns +
                 ", town='" + town + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ",key='"+ key + '\''+
                 '}';
     }
 }

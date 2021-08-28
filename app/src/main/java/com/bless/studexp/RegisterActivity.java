@@ -1,11 +1,5 @@
 package com.bless.studexp;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,15 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bless.studexp.Utils.ImageManager;
 import com.bless.studexp.Utils.OnEmailCheckListener;
 import com.bless.studexp.models.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,6 +28,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -59,12 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-        btn_sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewUser();
-            }
-        });
+        btn_sign_up.setOnClickListener(v -> createNewUser());
     }
     private void init(){
         img=findViewById(R.id.login_background);
@@ -81,8 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
         mRef=mDb.getReference().child(getString(R.string.users));
 
     }
-
-
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
@@ -108,24 +98,13 @@ public class RegisterActivity extends AppCompatActivity {
             Bitmap bt= ImageManager.reduceBitmapSize(bm,1000000);
             byte[] imgByte=ImageManager.getByteFromBitMap(bt);
             StorageReference storageReference=mFS.getReference().child("images/"+ UUID.randomUUID().toString());
-            UploadTask uploadTask=null;
+            UploadTask uploadTask;
             uploadTask=storageReference.putBytes(imgByte);
-            uploadTask.addOnSuccessListener(RegisterActivity.this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> filePath=taskSnapshot.getStorage().getDownloadUrl();
-                    filePath.addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            img_url=task.getResult().toString();
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull  Exception e) {
+            uploadTask.addOnSuccessListener(RegisterActivity.this, taskSnapshot -> {
+                Task<Uri> filePath=taskSnapshot.getStorage().getDownloadUrl();
+                filePath.addOnCompleteListener(task -> img_url=task.getResult().toString());
+            }).addOnFailureListener(e -> {
 
-                }
             });
         }
         else{
@@ -148,13 +127,16 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Account with such Email Already exist", Toast.LENGTH_SHORT).show();
                     }
                     else{
+                        List<String> arr = new ArrayList<>();
+                        arr.add("Useless 1");
+                        arr.add("useless 2");
                         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, task -> {
                             if(task.isSuccessful()){
                                 mRef.child(mAuth.getUid())
                                         .setValue(new User(name,
                                                 level
-                                                ,email,
-                                                null,
+                                                ,email
+                                                ,null,
                                                 0,
                                                 town,
                                                 img_url))
@@ -164,8 +146,19 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                             else{
                                                 Toast.makeText(RegisterActivity.this, "Successful Registration", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
-                                                finish();;
+                                                DatabaseReference mRee = FirebaseDatabase.getInstance().getReference("User");
+                                                mRee.child(FirebaseAuth.getInstance().getUid()).child("groupId")
+                                                        .child(String.valueOf(0))
+                                                        .setValue("General Welcome Group").addOnCompleteListener(task2 -> {
+                                                            if(task2.isSuccessful()){
+                                                                startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
+                                                                finish();
+                                                            }
+                                                            else{
+                                                                Toast.makeText(getApplicationContext(), "An Unexpected error occurred", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+
                                             }
                                         });
                             }
@@ -180,12 +173,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
     public void isCheckEmail(final String email,final OnEmailCheckListener listener){
-        mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-            @Override
-            public void onComplete(@NonNull  Task<SignInMethodQueryResult> task) {
-                boolean check = !task.getResult().getSignInMethods().isEmpty();
-                listener.onSuccess(check);
-            }
+        mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task -> {
+            boolean check = !task.getResult().getSignInMethods().isEmpty();
+            listener.onSuccess(check);
         });
     }
     public void goToLoginAct(View view) {

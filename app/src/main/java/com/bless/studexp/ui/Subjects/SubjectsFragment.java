@@ -16,15 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bless.studexp.Adapters.SubjectRecyclerAdapter;
 import com.bless.studexp.CourseDetailsActivity;
-import com.bless.studexp.CourseGroupChat;
 import com.bless.studexp.R;
 import com.bless.studexp.databinding.FragmentSubjectsBinding;
 import com.bless.studexp.models.Course;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,11 +32,10 @@ import java.util.Map;
 
 public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter.OnCourseListener {
 
-    private SubjectsViewModel mSubjectsViewModel;
     private FragmentSubjectsBinding binding;
     private FirebaseFirestore db;
     private FirebaseDatabase mDb;
-    private DatabaseReference mRef;
+    private DatabaseReference mRef , mRef2;;
     private ArrayList<Course> course2;
     private Course displayingCourse;
     private FirebaseAuth mAuth;
@@ -48,19 +43,11 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
     public static final String TAG = "SUBJECT_FRAGMENT";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mSubjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
+        SubjectsViewModel subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
         binding = FragmentSubjectsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         init();
-
-//         mSubjectsViewModel.getSubjectList().observe(getViewLifecycleOwner(), new Observer<ArrayList<Course>>() {
-//             @Override
-//             public void onChanged(ArrayList<Course> courses) {
-//
-//
-//             }
-//         });
-        mSubjectsViewModel.getCourseList().observe(getViewLifecycleOwner(), courses -> {
+        subjectsViewModel.getCourseList().observe(getViewLifecycleOwner(), courses -> {
             course2 = courses;
             displayingCourse = courses.get(0);
             displayCourses(courses);
@@ -74,39 +61,28 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
             binding.shimmerImageSelected.stopShimmer();
             binding.shimmerImageSelected.setVisibility(View.GONE);
             binding.relativeLayout.setVisibility(View.VISIBLE);
+          //  getCounts();
         });
-        binding.testUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                db = FirebaseFirestore.getInstance();
-                AddDataToCloudStore(new Course("Biology",
-                        "Science",
-                        "The Study of life",
-                        "https://image.shutterstock.com/z/stock-photo-healthy-weaned-piglet-in-farrowing-unit-1311114293.jpg",
-                        "Secondary School",
-                        "this has to be modified "
-                ));
-            }
-        });
-        binding.btnJoin.setOnClickListener(view -> {
-            //   Toast.makeText(getActivity(),displayingCourse.toString() , Toast.LENGTH_SHORT).show();
-            new MaterialAlertDialogBuilder(getActivity())
-                    .setBackgroundInsetEnd(24)
-                    .setBackgroundInsetBottom(24)
-                    .setMessage("Sure You want to join the group?")
-                    .setNegativeButton("No", (dialogInterface, i) -> {
-
-                    })
-                    .setPositiveButton("Yes", (dialogInterface, i) -> addUserToTheGroup())
-                    .show();
+        binding.testUpload.setOnClickListener(view -> {
+            db = FirebaseFirestore.getInstance();
+            AddDataToCloudStore(new Course("Biology",
+                    "Science",
+                    "The Study of life",
+                    "https://image.shutterstock.com/z/stock-photo-healthy-weaned-piglet-in-farrowing-unit-1311114293.jpg",
+                    "Secondary School",
+                    "this has to be modified "
+            ));
         });
         binding.relativeLayout.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CourseDetailsActivity.class);
             intent.putExtra(getString(R.string.displaying_course), displayingCourse);
             startActivity(intent);
         });
+
         return root;
     }
+
+
 
     private void init() {
         binding.shimmerFrameLayout.startShimmer();
@@ -117,21 +93,8 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
         mRef = mDb.getReference();
         mAuth = FirebaseAuth.getInstance();
         user_key = mAuth.getUid();
-    }
+        mRef2 = FirebaseDatabase.getInstance().getReference();
 
-    private void addUserToTheGroup() {
-        mRef.child("Groups").child(displayingCourse.getKey()).child("members").setValue(user_key)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(getActivity(), "Error joining group", Toast.LENGTH_SHORT).show();
-                        } else {
-                            startActivity(new Intent(getActivity(), CourseGroupChat.class));
-                        }
-                    }
-                });
-        Toast.makeText(getActivity(), "Successfully Joined", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -143,7 +106,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
     private void displayCourses(ArrayList<Course> courses) {
         binding.recyclerView.setAdapter(new SubjectRecyclerAdapter(getActivity(), courses, this));
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
+      //  getCounts();
     }
 
     @Override
@@ -151,6 +114,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
         displayMainImage(course);
         Log.d(TAG, "onItemClicked: " + course.getCategory());
         displayingCourse = course;
+
     }
 
     private void displayMainImage(Course course) {
@@ -158,6 +122,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
         Glide.with(getContext()).load(imageUrl).into(binding.imageBroad);
         binding.subjectDesc.setText(course.getDescription());
         binding.subjectTe.setText(course.getName());
+
     }
 
     private void AddDataToCloudStore(Course course) {
@@ -171,12 +136,7 @@ public class SubjectsFragment extends Fragment implements SubjectRecyclerAdapter
         db.collection("Courses")
                 .add(courseUpdate)
                 .addOnSuccessListener(documentReference -> Toast.makeText(getActivity(), "Successfully uploaded", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "onFailure: Load Failure");
-                    }
-                });
+                .addOnFailureListener(ze -> Log.d(TAG, "onFailure: Load Failure"));
 
     }
 }
