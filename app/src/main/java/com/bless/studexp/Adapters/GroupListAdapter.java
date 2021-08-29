@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bless.studexp.R;
+import com.bless.studexp.Utils.OnGroupClickListener;
 import com.bless.studexp.models.Group;
 import com.bumptech.glide.Glide;
 
@@ -19,16 +20,18 @@ import java.util.List;
 public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.GroupViewHolder> {
     private  final Context context;
     private  final List<Group> groups;
+    private OnGroupClickListener onGroupListener;
 
-    public GroupListAdapter(Context contextt, List<Group> groups) {
-        this.context = contextt;
+    public GroupListAdapter(Context context, List<Group> groups,OnGroupClickListener onGroupListener) {
+        this.context = context;
         this.groups = groups;
+        this.onGroupListener=onGroupListener;
     }
 
     @NonNull
     @Override
     public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return  new GroupViewHolder(LayoutInflater.from(context).inflate(R.layout.group_display,parent,false));
+        return  new GroupViewHolder(LayoutInflater.from(context).inflate(R.layout.group_display,parent,false),onGroupListener);
     }
 
     @Override
@@ -43,13 +46,21 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
         return groups.size();
     }
 
-    public class GroupViewHolder extends RecyclerView.ViewHolder {
+    public class GroupViewHolder extends RecyclerView.ViewHolder implements   View.OnClickListener {
         private ImageView profileImage;
         private TextView profileName;;
-        public GroupViewHolder(@NonNull View itemView) {
+        OnGroupClickListener onGroupListener;
+        public GroupViewHolder(@NonNull View itemView,OnGroupClickListener onGroupListener) {
             super(itemView);
+            this.onGroupListener=onGroupListener;
             profileImage=itemView.findViewById(R.id.profile_image);
             profileName=itemView.findViewById(R.id.profile_name);
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View view) {
+            onGroupListener.onItemClicked(groups.get(getAdapterPosition()));
         }
     }
+
 }

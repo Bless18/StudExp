@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudEXP">
         <activity
+            android:name=".GroupChatActivity"
+            android:exported="true" />
+        <activity
             android:name=".CourseDetailsActivity"
             android:exported="true" />
         <activity

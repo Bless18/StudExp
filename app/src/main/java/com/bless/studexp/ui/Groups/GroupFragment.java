@@ -1,5 +1,6 @@
 package com.bless.studexp.ui.Groups;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bless.studexp.Adapters.GroupListAdapter;
+import com.bless.studexp.GroupChatActivity;
+import com.bless.studexp.Utils.OnGroupClickListener;
 import com.bless.studexp.databinding.FragmentGroupsBinding;
 import com.bless.studexp.models.Group;
 import com.bless.studexp.models.User;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GroupFragment extends Fragment {
+public class GroupFragment extends Fragment implements OnGroupClickListener {
 
     public static final String TAG = "GroupFragment";
     private GroupViewModel mGroupViewModel;
@@ -63,7 +66,7 @@ public class GroupFragment extends Fragment {
 
     private void displayListGroups(List<Group> groups) {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.recyclerView.setAdapter(new GroupListAdapter(getActivity(), groups));
+        binding.recyclerView.setAdapter(new GroupListAdapter(getActivity(), groups,this));
 
     }
 
@@ -115,5 +118,10 @@ public class GroupFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onItemClicked(Group group) {
+        startActivity(new Intent(getActivity(), GroupChatActivity.class));
     }
 }

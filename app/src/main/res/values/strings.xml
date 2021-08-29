@@ -20,7 +20,7 @@
     <string name="menu_experiments">Experiments</string>
     <string name="menu_account">Account</string>
 
-<!--   my customized String Variables  -->
+    <!--   my customized String Variables  -->
     <string name="displaying_course">Displaying Course</string>
     <string name="users">Users</string>
     <string name="groups">Groups</string>
