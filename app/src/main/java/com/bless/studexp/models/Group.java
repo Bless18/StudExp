@@ -1,8 +1,9 @@
 package com.bless.studexp.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Group {
+public class Group implements Serializable {
     private  String id;
     private String groupIcon;
     private ArrayList<String> members;

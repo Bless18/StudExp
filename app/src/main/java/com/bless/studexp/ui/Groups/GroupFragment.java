@@ -31,7 +31,7 @@ import java.util.List;
 
 
 public class GroupFragment extends Fragment implements OnGroupClickListener {
-
+     public static final String GROUP_FRAGMENT="GROUP FRAGMENT";
     public static final String TAG = "GroupFragment";
     private GroupViewModel mGroupViewModel;
     private FragmentGroupsBinding binding;
@@ -122,6 +122,8 @@ public class GroupFragment extends Fragment implements OnGroupClickListener {
 
     @Override
     public void onItemClicked(Group group) {
-        startActivity(new Intent(getActivity(), GroupChatActivity.class));
+      Intent intent = new Intent(getActivity(),GroupChatActivity.class);
+      intent.putExtra(GROUP_FRAGMENT,group);
+      startActivity(intent);
     }
 }
