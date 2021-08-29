@@ -5,14 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -21,7 +16,6 @@ import com.bless.studexp.databinding.FragmentGroupsBinding;
 import com.bless.studexp.models.Group;
 import com.bless.studexp.models.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,13 +29,13 @@ import java.util.List;
 
 public class GroupFragment extends Fragment {
 
+    public static final String TAG = "GroupFragment";
     private GroupViewModel mGroupViewModel;
     private FragmentGroupsBinding binding;
-    public static final String TAG="GroupFragment";
     private DatabaseReference mRef;
     private String curUser;
     private List<String> userGroups;
-    private  List<User> mUsers;
+    private List<User> mUsers;
     private List<Group> groupList;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,12 +47,9 @@ public class GroupFragment extends Fragment {
             FirebaseAuth.getInstance().signOut();
             getActivity().finish();
         });
-//        mGroupViewModel.getGroups().observe(getViewLifecycleOwner(),groups -> {
-//            displayListGroups(groups);
-//            Toast.makeText(getActivity(), ""+groups, Toast.LENGTH_SHORT).show();
-//        });
-       init();
-       getGroups();
+
+        init();
+        getGroups();
 
         return root;
     }
@@ -67,40 +58,40 @@ public class GroupFragment extends Fragment {
         mRef = FirebaseDatabase.getInstance().getReference();
         curUser = FirebaseAuth.getInstance().getUid();
         userGroups = new ArrayList<>();
-        groupList= new ArrayList<>();
+        groupList = new ArrayList<>();
     }
 
     private void displayListGroups(List<Group> groups) {
-      //  Toast.makeText(this, groups.toString(), Toast.LENGTH_SHORT).show();
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.recyclerView.setAdapter(new GroupListAdapter(getActivity(),groups));
+        binding.recyclerView.setAdapter(new GroupListAdapter(getActivity(), groups));
 
     }
+
     public void getGroups() {
-        Query query=mRef.child("Users");
+        Query query = mRef.child("Users");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d(TAG, "onDataChange: "+snapshot.getValue());
-                for (DataSnapshot ds: snapshot.getChildren()) {
-                    if (ds.getKey().equals(curUser)){
-                        User u =ds.getValue(User.class);
-                        Log.d(TAG, "onDataChange: "+ds.getValue());
+                Log.d(TAG, "onDataChange: " + snapshot.getValue());
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.getKey().equals(curUser)) {
+                        User u = ds.getValue(User.class);
+                        Log.d(TAG, "onDataChange: " + ds.getValue());
                         userGroups.addAll(u.getGroupId());
                     }
                 }
 
-                for (String key:userGroups) {
-                   mRef.child("Groups").addValueEventListener(new ValueEventListener() {
+                for (String key : userGroups) {
+                    mRef.child("Groups").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot ds: snapshot.getChildren() ) {
-                                  Group g = ds.getValue(Group.class);
-                                    Log.d(TAG, "onDataChange: Toast"+g);
-                                 if(g.getId().equals(key)){
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                Group g = ds.getValue(Group.class);
+                                Log.d(TAG, "onDataChange: Toast" + g);
+                                if (g.getId().equals(key)) {
                                     groupList.add(g);
-                               }
-                               displayListGroups(groupList);
+                                }
+                                displayListGroups(groupList);
                             }
                         }
 
@@ -116,7 +107,8 @@ public class GroupFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });;
+        });
+        ;
     }
 
     @Override
