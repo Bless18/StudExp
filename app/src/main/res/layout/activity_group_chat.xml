@@ -44,6 +44,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/card"
                 android:text="@string/test_heading"
+                android:textColor="#8C9EFF"
                 android:textStyle="bold" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -78,9 +79,9 @@
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_snapshot"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -89,18 +90,19 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="47dp"
+                android:layout_marginStart="47dp"
                 android:layout_marginTop="7dp"
-                android:layout_toRightOf="@+id/take_photo"
+                android:layout_toEndOf="@+id/take_photo"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_camera" />
+                android:src="@drawable/ic_camera"
+                android:contentDescription="TODO" />
 
             <ImageButton
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_file"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -129,7 +131,7 @@
                 android:layout_marginLeft="20dp"
 
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
@@ -145,23 +147,26 @@
                         android:layout_weight="80"
                         android:background="@android:color/transparent"
                         android:hint="Enter message"
+
                         android:maxHeight="100dp"
                         android:minHeight="40dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textColor="@color/black"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        tools:ignore="TouchTargetSizeCheck"
+                         />
 
                     <ImageButton
                         android:id="@+id/select_one"
                         android:layout_width="0dp"
                         android:layout_height="35dp"
                         android:layout_marginVertical="5dp"
-                        android:layout_marginRight="5dp"
-                        android:onClick="OpenContentCard"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="10"
+                        android:minHeight="50dp"
+                        android:onClick="OpenContentCard"
                         android:src="@drawable/ic_link"
-                    />
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -171,14 +176,15 @@
         <ImageButton
             android:id="@+id/sendMessage"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="10"
             android:background="@android:color/transparent"
             android:onClick="sentMessage"
             android:src="@drawable/ic_send"
-           />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
 
