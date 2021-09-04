@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.bless.studexp.databinding.ActivityGroupChatBinding;
 import com.bless.studexp.models.Course;
@@ -25,6 +26,19 @@ public class GroupChatActivity extends AppCompatActivity {
         group= (Group) intent.getSerializableExtra(GROUP_FRAGMENT);
         Glide.with(this).load(group.getGroupIcon()).into(binding.groupIcon);
         binding.groupName.setText(group.getName());
+
+    }
+
+    public void sentMessage(View view) {
+    }
+
+    public void OpenContentCard(View view) {
+        if (binding.contentCard.getVisibility()==View.VISIBLE){
+            binding.contentCard.setVisibility(View.GONE);
+        }
+        else {
+            binding.contentCard.setVisibility(View.VISIBLE);
+        }
 
     }
 }

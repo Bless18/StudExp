@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/app/StudEXP/app/src/main/res/drawable-v24/custom_button.xml" value="0.240625" />
         <entry key="..\:/app/StudEXP/app/src/main/res/drawable-v24/custom_input.xml" value="0.240625" />
+        <entry key="..\:/app/StudEXP/app/src/main/res/drawable-v24/ic_subject.xml" value="0.240625" />
+        <entry key="..\:/app/StudEXP/app/src/main/res/drawable/ic_menu_camera.xml" value="0.240625" />
+        <entry key="..\:/app/StudEXP/app/src/main/res/drawable/ic_snapshot.xml" value="0.240625" />
         <entry key="..\:/app/StudEXP/app/src/main/res/drawable/rounded_default.xml" value="0.1" />
         <entry key="..\:/app/StudEXP/app/src/main/res/layout/activity_course_details.xml" value="0.22447916666666667" />
         <entry key="..\:/app/StudEXP/app/src/main/res/layout/activity_course_group_chat.xml" value="0.22447916666666667" />
