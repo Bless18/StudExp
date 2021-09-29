@@ -88,7 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void uploadPhoto() {
         if(imgUrl!=null){
             Toast.makeText(this, "there is an image", Toast.LENGTH_SHORT).show();
-
             Bitmap bm = null;
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(),imgUrl);

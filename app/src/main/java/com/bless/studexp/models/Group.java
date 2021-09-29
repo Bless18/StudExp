@@ -11,7 +11,7 @@ public class Group implements Serializable {
     private String recentMessage;
     private String description;
     private String category;
-
+   private Message message;
     public Group() {
     }
 
@@ -81,6 +81,18 @@ public class Group implements Serializable {
         this.category = category;
     }
 
+    public Message getMessage() {
+        return message;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Group{" +
@@ -91,6 +103,7 @@ public class Group implements Serializable {
                 ", recentMessage='" + recentMessage + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
+                ", message=" + message +
                 '}';
     }
 }
