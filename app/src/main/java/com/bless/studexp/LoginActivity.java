@@ -1,10 +1,5 @@
 package com.bless.studexp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,18 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             init();
-            btnSignIn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    signIn();
-                }
-            });
-            tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    displayDialog();
-                }
-            });
+            btnSignIn.setOnClickListener(v -> signIn());
+            tvForgotPassword.setOnClickListener(v -> displayDialog());
         }
 
     }
@@ -66,23 +51,17 @@ public class LoginActivity extends AppCompatActivity {
         emailInput.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         rel.addView(emailInput);
         builder.setView(rel);
-        builder.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                if(!emailInput.getText().toString().equals("")){
-                    mAuth.sendPasswordResetEmail(emailInput.getText().toString());
-                    Toast.makeText(LoginActivity.this, "Check Email for password retrieval", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "invalid email", Toast.LENGTH_SHORT).show();
-                }
+        builder.setPositiveButton("Reset", (dialog, id) -> {
+            if(!emailInput.getText().toString().equals("")){
+                mAuth.sendPasswordResetEmail(emailInput.getText().toString());
+                Toast.makeText(LoginActivity.this, "Check Email for password retrieval", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(LoginActivity.this, "invalid email", Toast.LENGTH_SHORT).show();
             }
         });
-        builder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("Dismiss", (dialog, id) -> dialog.dismiss());
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -106,17 +85,14 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             mAuth.signInWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(!task.isSuccessful()){
-                                Toast.makeText(LoginActivity.this, "invalid credentials", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(LoginActivity.this, "successful login", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
-                                finish();
-                            }
+                    .addOnCompleteListener(task -> {
+                        if(!task.isSuccessful()){
+                            Toast.makeText(LoginActivity.this, "invalid credentials", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "successful login", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                            finish();
                         }
                     });
         }

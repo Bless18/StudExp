@@ -53,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mGetContent.launch("image/*");
-
             }
         });
         btn_sign_up.setOnClickListener(v -> createNewUser());
@@ -94,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            assert bm != null;
             Bitmap bt= ImageManager.reduceBitmapSize(bm,1000000);
             byte[] imgByte=ImageManager.getByteFromBitMap(bt);
             StorageReference storageReference=mFS.getReference().child("images/"+ UUID.randomUUID().toString());

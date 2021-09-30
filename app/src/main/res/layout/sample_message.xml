@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_marginVertical="3dp"
         android:elevation="4dp"
         android:minHeight="50dp"
@@ -26,8 +27,9 @@
                 android:layout_height="wrap_content"
                 android:text="name"
                 android:textColor="@color/black"
-                android:textSize="7dp"
-                android:textStyle="bold"/>
+                android:textSize="7sp"
+                android:textStyle="bold"
+                tools:ignore="SmallSp" />
 
             <LinearLayout
                 android:id="@+id/lin_layout_1"
@@ -41,14 +43,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxHeight="200dp"
-                    android:minHeight="50dp"
-                />
+                    android:minHeight="50dp" />
 
                 <TextView
                     android:id="@+id/message_image_caption"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                 />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -58,14 +58,16 @@
                 android:layout_below="@+id/lin_layout_1">
 
                 <TextView
+                    android:autoLink="email|web|phone"
+                    android:textColorLink="#F7FF00"
+                    android:id="@+id/message_body"
+                    android:linksClickable="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:text="Sample test"
                     android:textColor="@color/black"
-                    android:id="@+id/message_body"
-                    android:textSize="9sp"
-                  />
+                    android:textSize="9sp" />
             </LinearLayout>
 
             <TextView

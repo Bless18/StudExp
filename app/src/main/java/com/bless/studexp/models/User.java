@@ -1,26 +1,25 @@
 package com.bless.studexp.models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class User {
     private String name;
     private String level;
     private String email;
     private ArrayList<String> groupId;
-    private int numQuesAns;
+    private int lActiveness;
     private String town;
     private String imageUrl;
     private String key;
     public User() {
     }
 
-    public User(String name, String level, String email, ArrayList<String> groupId, int numQuesAns, String town, String imageUrl) {
+    public User(String name, String level, String email, ArrayList<String> groupId, int lActiveness, String town, String imageUrl) {
         this.name = name;
         this.level = level;
         this.email = email;
         this.groupId = groupId;
-        this.numQuesAns = numQuesAns;
+        this.lActiveness = lActiveness;
         this.town = town;
         this.imageUrl = imageUrl;
     }
@@ -65,12 +64,12 @@ public class User {
         this.groupId = groupId;
     }
 
-    public int getNumQuesAns() {
-        return numQuesAns;
+    public int getlActiveness() {
+        return lActiveness;
     }
 
-    public void setNumQuesAns(int numQuesAns) {
-        this.numQuesAns = numQuesAns;
+    public void setlActiveness(int lActiveness) {
+        this.lActiveness = lActiveness;
     }
 
     public String getTown() {
@@ -96,7 +95,7 @@ public class User {
                 ", level='" + level + '\'' +
                 ", email='" + email + '\'' +
                 ", groupId=" + groupId +
-                ", numQuesAns=" + numQuesAns +
+                ", lActiveness=" + lActiveness +
                 ", town='" + town + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ",key='"+ key + '\''+
